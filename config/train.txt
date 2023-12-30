@@ -10,7 +10,7 @@
 --metrics auc
 
 # Data args
---data_name CafeF_News_Recommend_Data
+--data_name MIND-data
 --train_behaviors_path data/train/behaviors.tsv
 --train_news_path data/train/news.tsv
 --eval_behaviors_path data/valid/behaviors.tsv
@@ -30,13 +30,13 @@
 
 # Train args
 --npratio 4
---train_batch_size 2
+--train_batch_size 16
 --eval_batch_size 64
 --dataloader_drop_last
---dataloader_num_workers 2
+--dataloader_num_workers 4
 --dataloader_pin_memory
---gradient_accumulation_steps 8
---num_train_epochs 5
+--gradient_accumulation_steps 4
+--num_train_epochs 3
 --learning_rate 2e-5
 --warmup_ratio 0.1
 --max_grad_norm 1.0
