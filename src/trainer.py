@@ -61,7 +61,7 @@ class Trainer(BaseTrainer):
         if args.fast_eval:
             eval_dataset = reader.read_train_dataset(args.data_name, args.eval_news_path, args.eval_behaviors_path)
         else:
-            eval_dataset = reader.read_train_dataset(args.data_name, args.eval_news_path, args.eval_behaviors_path)
+            eval_dataset = reader.read_valid_dataset(args.data_name, args.eval_news_path, args.eval_behaviors_path)
         self._log_dataset(train_dataset, eval_dataset)
 
         total_train_batch_size = args.train_batch_size * args.gradient_accumulation_steps
