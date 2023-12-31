@@ -95,39 +95,27 @@ class FastEvaluator(BaseEvaluator):
 class SlowEvaluator(BaseEvaluator):
     def __init__(self, dataset: Dataset):
         super().__init__(dataset)
-        self.impression_ids = []
 
     def _convert_targets(self):
-        group_labels = {}
         for sample in self.dataset.samples:
-            impression_id = sample.impression.impression_id
-            group_labels[impression_id] = group_labels.get(impression_id, []) + sample.impression.label
-
-        group_labels = sorted(group_labels.items())
-        self.targets = [i[1] for i in group_labels]
+            self.targets.append(sample.impression.label)
 
     def _convert_pred(self):
-        group_predictions = {}
-        for prob_prediction, impression_id in zip(self.prob_predictions, self.impression_ids):
-            group_predictions[impression_id] = group_predictions.get(impression_id, []) + prob_prediction
-
-        group_predictions = sorted(group_predictions.items())
-        self.prob_predictions = [i[1] for i in group_predictions]
+        pass
 
     def eval_batch(self, logits: Tensor, impression_ids: Tensor):
         r"""
         Evaluation a batch
 
         Args:
-            logits: tensor of shape ``(batch_size, 1)``.
-            impression_ids: tensor of shape ``(batch_size, 1)``.
+            logits: tensor of shape ``(batch_size, npratio + 1)``.
+            impression_ids: tensor of shape ``(batch_size, npratio + 1)``.
 
         Returns:
             None
         """
-        probs = torch.sigmoid(logits)
+        probs = torch_f.softmax(logits, dim=1)
         self.prob_predictions.extend(probs.tolist())
-        self.impression_ids.extend(impression_ids.tolist())
 
 
 def compute_mrr_score(y_true: np.ndarray, y_score: np.ndarray):
