@@ -31,12 +31,12 @@
 # Train args
 --npratio 4
 --fast_eval
---train_batch_size 4
---eval_batch_size 8
+--train_batch_size 16
+--eval_batch_size 16
 --dataloader_drop_last
 --dataloader_num_workers 4
 --dataloader_pin_memory
---gradient_accumulation_steps 2
+--gradient_accumulation_steps 1
 --num_train_epochs 1
 --learning_rate 2e-5
 --warmup_ratio 0.1
@@ -44,4 +44,4 @@
 --weight_decay 0.01
 --logging_steps 200
 --evaluation_info metrics
---eval_steps 800
+--eval_steps 2000
