@@ -30,6 +30,7 @@
 
 # Train args
 --npratio 4
+--eval_fast
 --train_batch_size 4
 --eval_batch_size 64
 --dataloader_drop_last
