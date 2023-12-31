@@ -44,4 +44,4 @@
 --weight_decay 0.01
 --logging_steps 200
 --evaluation_info metrics
---eval_steps 200
+--eval_steps 800
