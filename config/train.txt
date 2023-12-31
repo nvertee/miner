@@ -33,7 +33,7 @@
 --train_batch_size 4
 --eval_batch_size 64
 --dataloader_drop_last
---dataloader_num_workers 4
+--dataloader_num_workers 12
 --dataloader_pin_memory
 --gradient_accumulation_steps 4
 --num_train_epochs 1
